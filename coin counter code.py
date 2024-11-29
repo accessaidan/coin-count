@@ -30,7 +30,6 @@ def print_coin_data():
 
 # menu system where they choose what to do
 def menu_system():
-    voulenteer_data = {}
     load_data()
 
     print("Menu:")
@@ -98,6 +97,7 @@ def use_again():
     print("Would you like to continue to use the programm?  [Y/N]")
     repeat = input("").lower()
     if repeat == "y":
+        voulenteer_data = {}
         menu_system()
 
     elif repeat == "n":
@@ -243,4 +243,5 @@ def decision_3(): # prints all voulenteers sorted by accuracy
         index_5 = index_5 + 1
 
 menu_system()
+decision_3()
 
