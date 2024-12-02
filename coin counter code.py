@@ -111,90 +111,105 @@ def use_again():
 
 # subroutine where voulenteer inputs bag
 def voulenteer_sub():
-    print("Enter your name:")
+    print("Enter your first name:")
     voulenteer_name = input("").lower()
-    index = 0
-    if voulenteer_name in voulenteer_data:
-
-        for i in range(len(voulenteer_data)):
-            if voulenteer_data[index]["name"] == voulenteer_name:
-                counted = voulenteer_data[index]["counted"]
-                correct = voulenteer_data[index]["correct"]
-                value = voulenteer_data[index]["value"]
-
-            else:
-                index = index + 1
-
-    else:
-        voulenteer_data.append(
-            {
-                "name": str(voulenteer_name),
-                "counted": int(0),
-                "correct": int(0),
-                "value": float(0.00),
-                "accuracy": float(0.00),
-            }
-        )
-
-        for i in range(len(voulenteer_data)):
-            if voulenteer_data[index]["name"] == voulenteer_name:
-                counted = voulenteer_data[index]["counted"]
-                correct = voulenteer_data[index]["correct"]
-                value = voulenteer_data[index]["value"]
-
-            else:
-                index = index + 1
-    print("Enter the type of coin you have collected:")
-    coin_type = input("")
-    if coin_type not in coin_data:
-        print("That is not a valid coin type, try again")
+    if voulenteer_name == "" or " " in voulenteer_name or voulenteer_name.isalpha() == False:
+        print("That is not a valid name")
         voulenteer_sub()
-
-    print("Enter the weight of your bag (xxxg)")
-    weight = float(input(""))
-
-    if weight != coin_data[coin_type]["weight"]:
-        print("That is not the correct weight of your bag")
-
-        add_or_remove(weight, coin_type)
-        counted = counted + 1
-        value = value + coin_data[coin_type]["value"]
+    
+    
 
     else:
-        counted = counted + 1
-        correct = correct + 1
-        value = value + coin_data[coin_type]["value"]
+    
 
-    voulenteer_data[index]["counted"] = counted
-    voulenteer_data[index]["correct"] = correct
-    voulenteer_data[index]["value"] = value
-    accuracy = correct / counted * 100
-    voulenteer_data[index]["accuracy"] = accuracy
+        print("Double check your name")
+        check_name = input ("Is the name correct, if not press [N], else press [enter]").lower()
+        if check_name == "n":
+            voulenteer_sub()
+        
+        else:
+            index = 0
+            if voulenteer_name in voulenteer_data:
 
-    data_sorted = sorted(voulenteer_data, key=itemgetter("accuracy"), reverse=True)
+                for i in range(len(voulenteer_data)):
+                    if voulenteer_data[index]["name"] == voulenteer_name:
+                        counted = voulenteer_data[index]["counted"]
+                        correct = voulenteer_data[index]["correct"]
+                        value = voulenteer_data[index]["value"]
 
-    file = open("voulenteer_data.txt", "w")
-    index_2 = 0
-    for i in range(len(voulenteer_data)):
-        string_name = str(data_sorted[index_2]["name"])
-        string_counted = str(data_sorted[index_2]["counted"])
-        string_correct = str(data_sorted[index_2]["correct"])
-        string_value = str(data_sorted[index_2]["value"])
-        string_accuracy = str(data_sorted[index_2]["accuracy"])
-        if (
-            string_counted != "0"
-        ):  # fixes the problem of a new line of the dictionary with 0 everything
-            file.write(string_name)
-            file.write(", ")
-            file.write(string_counted)
-            file.write(", ")
-            file.write(string_correct)
-            file.write(", ")
-            file.write(string_value)
-            file.write(", ")
-            file.write(string_accuracy)
-            file.write("\n")
-        index_2 = index_2 + 1
+                    else:
+                        index = index + 1
+
+            else:
+                voulenteer_data.append(
+                    {
+                        "name": str(voulenteer_name),
+                        "counted": int(0),
+                        "correct": int(0),
+                        "value": float(0.00),
+                        "accuracy": float(0.00),
+                    }
+                )
+
+                for i in range(len(voulenteer_data)):
+                    if voulenteer_data[index]["name"] == voulenteer_name:
+                        counted = voulenteer_data[index]["counted"]
+                        correct = voulenteer_data[index]["correct"]
+                        value = voulenteer_data[index]["value"]
+
+                    else:
+                        index = index + 1
+            print("Enter the type of coin you have collected:")
+            coin_type = input("")
+            if coin_type not in coin_data:
+                print("That is not a valid coin type, try again")
+                voulenteer_sub()
+
+            print("Enter the weight of your bag (xxxg)")
+            weight = float(input(""))
+
+            if weight != coin_data[coin_type]["weight"]:
+                print("That is not the correct weight of your bag")
+
+                add_or_remove(weight, coin_type)
+                counted = counted + 1
+                value = value + coin_data[coin_type]["value"]
+
+            else:
+                counted = counted + 1
+                correct = correct + 1
+                value = value + coin_data[coin_type]["value"]
+
+            voulenteer_data[index]["counted"] = counted
+            voulenteer_data[index]["correct"] = correct
+            voulenteer_data[index]["value"] = value
+            accuracy = correct / counted * 100
+            voulenteer_data[index]["accuracy"] = accuracy
+
+            data_sorted = sorted(voulenteer_data, key=itemgetter("accuracy"), reverse=True)
+
+            file = open("voulenteer_data.txt", "w")
+            index_2 = 0
+            for i in range(len(voulenteer_data)):
+                string_name = str(data_sorted[index_2]["name"])
+                string_counted = str(data_sorted[index_2]["counted"])
+                string_correct = str(data_sorted[index_2]["correct"])
+                string_value = str(data_sorted[index_2]["value"])
+                string_accuracy = str(data_sorted[index_2]["accuracy"])
+                if (
+                    string_counted != "0"
+                ):  # fixes the problem of a new line of the dictionary with 0 everything
+                    file.write(string_name)
+                    file.write(", ")
+                    file.write(string_counted)
+                    file.write(", ")
+                    file.write(string_correct)
+                    file.write(", ")
+                    file.write(string_value)
+                    file.write(", ")
+                    file.write(string_accuracy)
+                    file.write("\n")
+                index_2 = index_2 + 1
 
 
 def add_or_remove(weight, coin_type):
@@ -243,5 +258,4 @@ def decision_3(): # prints all voulenteers sorted by accuracy
         index_5 = index_5 + 1
 
 menu_system()
-decision_3()
 
