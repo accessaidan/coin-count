@@ -167,7 +167,7 @@ def voulenteer_sub():
 
             print("Enter the weight of your bag (xxxg)")
             
-            try:       un hash when math error fixed
+            try:
             # add another tab to all lines in the rest of subroutine
                 weight = float(input(""))
 
