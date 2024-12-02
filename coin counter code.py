@@ -166,69 +166,77 @@ def voulenteer_sub():
                 voulenteer_sub()
 
             print("Enter the weight of your bag (xxxg)")
-            weight = float(input(""))
+            
+            
+            try:
+                weight = float(input(""))
+                
 
-            if weight != coin_data[coin_type]["weight"]:
-                print("That is not the correct weight of your bag")
+                if weight != coin_data[coin_type]["weight"]:
+                    print("That is not the correct weight of your bag")
 
-                add_or_remove(weight, coin_type)
-                counted = counted + 1
-                value = value + coin_data[coin_type]["value"]
+                    add_or_remove(weight, coin_type)
+                    counted = counted + 1
+                    value = value + coin_data[coin_type]["value"]
 
-            else:
-                counted = counted + 1
-                correct = correct + 1
-                value = value + coin_data[coin_type]["value"]
+                else:
+                    counted = counted + 1
+                    correct = correct + 1
+                    value = value + coin_data[coin_type]["value"]
 
-            voulenteer_data[index]["counted"] = counted
-            voulenteer_data[index]["correct"] = correct
-            voulenteer_data[index]["value"] = value
-            accuracy = correct / counted * 100
-            voulenteer_data[index]["accuracy"] = accuracy
+                voulenteer_data[index]["counted"] = counted
+                voulenteer_data[index]["correct"] = correct
+                voulenteer_data[index]["value"] = value
+                accuracy = correct / counted * 100
+                voulenteer_data[index]["accuracy"] = accuracy
 
-            data_sorted = sorted(voulenteer_data, key=itemgetter("accuracy"), reverse=True)
+                data_sorted = sorted(voulenteer_data, key=itemgetter("accuracy"), reverse=True)
 
-            file = open("voulenteer_data.txt", "w")
-            index_2 = 0
-            for i in range(len(voulenteer_data)):
-                string_name = str(data_sorted[index_2]["name"])
-                string_counted = str(data_sorted[index_2]["counted"])
-                string_correct = str(data_sorted[index_2]["correct"])
-                string_value = str(data_sorted[index_2]["value"])
-                string_accuracy = str(data_sorted[index_2]["accuracy"])
-                if (
-                    string_counted != "0"
-                ):  # fixes the problem of a new line of the dictionary with 0 everything
-                    file.write(string_name)
-                    file.write(", ")
-                    file.write(string_counted)
-                    file.write(", ")
-                    file.write(string_correct)
-                    file.write(", ")
-                    file.write(string_value)
-                    file.write(", ")
-                    file.write(string_accuracy)
-                    file.write("\n")
-                index_2 = index_2 + 1
+                file = open("voulenteer_data.txt", "w")
+                index_2 = 0
+                for i in range(len(voulenteer_data)):
+                    string_name = str(data_sorted[index_2]["name"])
+                    string_counted = str(data_sorted[index_2]["counted"])
+                    string_correct = str(data_sorted[index_2]["correct"])
+                    string_value = str(data_sorted[index_2]["value"])
+                    string_accuracy = str(data_sorted[index_2]["accuracy"])
+                    if (
+                        string_counted != "0"
+                    ):  # fixes the problem of a new line of the dictionary with 0 everything
+                        file.write(string_name)
+                        file.write(", ")
+                        file.write(string_counted)
+                        file.write(", ")
+                        file.write(string_correct)
+                        file.write(", ")
+                        file.write(string_value)
+                        file.write(", ")
+                        file.write(string_accuracy)
+                        file.write("\n")
+                    index_2 = index_2 + 1
+
+            except:
+                print("That is not a valid input, enter details again")
+                voulenteer_sub()       
 
 
-def add_or_remove(weight, coin_type):
-    index_3 = 0
-    arr_coin_types = ["1p", "2p", "5p", "10p", "20p", "50p", "£1", "£2"]
-    arr_sing_weight = [3.65, 7.12, 2.35, 6.50, 5.00, 8.00, 8.75, 12.00]
-    for i in range(len(arr_coin_types)):
-        if arr_coin_types != coin_type:
+    def add_or_remove(weight, coin_type):
+        index_3 = 0
+        arr_coin_types = ["1p", "2p", "5p", "10p", "20p", "50p", "£1", "£2"]
+        arr_sing_weight = [3.65, 7.12, 2.35, 6.50, 5.00, 8.00, 8.75, 12.00]
+        for i in range(len(arr_coin_types)):
+            if arr_coin_types != coin_type:
 
-            index_3 = index_3 + 1
+                index_3 = index_3 + 1
 
-    needed_weight = coin_data[coin_type]["weight"]
-    difference = needed_weight - weight
-    if difference > 0:
-        amount = difference / arr_sing_weight[index_3]
-        print("You need to add", amount, "more coins to the bag")
-    else:
-        amount = (difference * -1) / arr_sing_weight[index_3]
-        print("You need to remove", amount, "coins from the bag")
+        needed_weight = coin_data[coin_type]["weight"]
+        difference = needed_weight - weight
+        if difference > 0:
+            amount = difference / arr_sing_weight[index_3]
+            print("You need to add", amount, "more coins to the bag")
+        else:
+            amount = (difference * -1) / arr_sing_weight[index_3]
+            print("You need to remove", amount, "coins from the bag")
 
 
 def decision_2():  # total bags inputted and value
