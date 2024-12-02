@@ -167,10 +167,10 @@ def voulenteer_sub():
 
             print("Enter the weight of your bag (xxxg)")
             
-            
-            try:
+            try:       un hash when math error fixed
+            # add another tab to all lines in the rest of subroutine
                 weight = float(input(""))
-                
+
 
                 if weight != coin_data[coin_type]["weight"]:
                     print("That is not the correct weight of your bag")
@@ -220,23 +220,24 @@ def voulenteer_sub():
                 voulenteer_sub()       
 
 
-    def add_or_remove(weight, coin_type):
-        index_3 = 0
-        arr_coin_types = ["1p", "2p", "5p", "10p", "20p", "50p", "£1", "£2"]
-        arr_sing_weight = [3.65, 7.12, 2.35, 6.50, 5.00, 8.00, 8.75, 12.00]
-        for i in range(len(arr_coin_types)):
-            if arr_coin_types != coin_type:
+def add_or_remove(weight, coin_type):
+    index_3 = 0
+    arr_coin_types = ["1p", "2p", "5p", "10p", "20p", "50p", "£1", "£2"]
+    arr_sing_weight = [3.65, 7.12, 2.35, 6.50, 5.00, 8.00, 8.75, 12.00]
+    for i in range(len(arr_coin_types)):
+        coin_type_needed = arr_coin_types[index_3]
+        if arr_coin_types[index_3] != coin_type:
 
-                index_3 = index_3 + 1
+            index_3 = index_3 + 1
 
-        needed_weight = coin_data[coin_type]["weight"]
-        difference = needed_weight - weight
-        if difference > 0:
-            amount = difference / arr_sing_weight[index_3]
-            print("You need to add", amount, "more coins to the bag")
-        else:
-            amount = (difference * -1) / arr_sing_weight[index_3]
-            print("You need to remove", amount, "coins from the bag")
+    needed_weight = coin_data[coin_type]["weight"]
+    difference = needed_weight - weight
+    if difference > 0:
+        amount = difference / arr_sing_weight[index_3]
+        print("You need to add", amount, "more coins to the bag")
+    else:
+        amount = (difference * -1) / arr_sing_weight[index_3]
+        print("You need to remove", amount, "coins from the bag")
 
 
 def decision_2():  # total bags inputted and value
